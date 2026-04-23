@@ -5,7 +5,7 @@ import {defineConfig, loadEnv} from 'vite';
 
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
-  const apiPort = env.SERVER_PORT || '4000';
+  const apiPort = env.SERVER_PORT || '3000';
   return {
     plugins: [react(), tailwindcss()],
     define: {
