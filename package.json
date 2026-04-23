@@ -8,7 +8,7 @@
     "server": "tsx watch server/index.ts",
     "dev:full": "npm run server & npm run dev",
     "build": "vite build",
-    "start": "npm run build && node server.js",
+    "start": "node server.js",
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit"
