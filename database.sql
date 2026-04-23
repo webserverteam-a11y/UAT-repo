@@ -2,13 +2,11 @@
 -- SEO Dashboard – Full Database Schema
 -- Engine: MySQL 8.0+
 -- Run this file once to initialise the database structure.
+-- NOTE: Import this file while already inside your target database
+--       (e.g. select the DB in phpMyAdmin before importing).
+--       Do NOT include CREATE DATABASE / USE statements on shared
+--       hosting where the user lacks those privileges.
 -- =============================================================
-
-CREATE DATABASE IF NOT EXISTS seo_dashboard
-  CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
-
-USE seo_dashboard;
 
 -- -------------------------------------------------------------
 -- 1. USERS
