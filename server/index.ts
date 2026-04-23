@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 import authRoutes         from './routes/auth';
 import tasksRoutes        from './routes/tasks';
@@ -10,8 +12,14 @@ import uploadHistoryRoutes from './routes/uploadHistory';
 
 dotenv.config();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname  = path.dirname(__filename);
+
 const app  = express();
 const PORT = Number(process.env.PORT || process.env.SERVER_PORT) || 3000;
+
+// ── Serve built React frontend ───────────────────────────────
+app.use(express.static(path.join(__dirname, '../dist')));
 
 // ── Middleware ───────────────────────────────────────────────
 const allowedOrigins = process.env.CORS_ORIGIN
@@ -29,6 +37,11 @@ app.use('/api/upload-history', uploadHistoryRoutes);
 
 // ── Health check ─────────────────────────────────────────────
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }));
+
+// ── Catch-all: serve React app for client-side routing ───────
+app.get('*', (_req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
+});
 
 // ── Start ────────────────────────────────────────────────────
 app.listen(PORT, () => {

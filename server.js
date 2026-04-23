@@ -6,4 +6,7 @@ import { pathToFileURL } from 'node:url';
 
 register('tsx/esm', pathToFileURL('./'));
 
-await import('./server/index.ts');
+async function main() {
+  await import('./server/index.ts');
+}
+main();
