@@ -11,7 +11,7 @@ import uploadHistoryRoutes from './routes/uploadHistory';
 dotenv.config();
 
 const app  = express();
-const PORT = Number(process.env.PORT || process.env.SERVER_PORT) || 4000;
+const PORT = Number(process.env.PORT || process.env.SERVER_PORT) || 3000;
 
 // ── Middleware ───────────────────────────────────────────────
 const allowedOrigins = process.env.CORS_ORIGIN
