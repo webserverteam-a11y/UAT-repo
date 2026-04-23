@@ -8,7 +8,7 @@ const router = Router();
 router.get('/', async (_req: Request, res: Response) => {
   try {
     const [rows] = await pool.query<RowDataPacket[]>(
-      'SELECT id, name, password, role, owner_name AS ownerName FROM users ORDER BY created_at'
+      'SELECT id, name, role, owner_name AS ownerName FROM users ORDER BY created_at'
     );
     res.json(rows);
   } catch (err) {
@@ -30,7 +30,7 @@ router.post('/', async (req: Request, res: Response) => {
        VALUES (?, ?, ?, ?, ?)`,
       [id, name, password, role, ownerName || '']
     );
-    res.status(201).json({ id, name, password, role, ownerName: ownerName || '' });
+    res.status(201).json({ id, name, role, ownerName: ownerName || '' });
   } catch (err: any) {
     if (err.code === 'ER_DUP_ENTRY') {
       res.status(409).json({ error: 'User with this id or name already exists' });
@@ -55,7 +55,7 @@ router.put('/:id', async (req: Request, res: Response) => {
       res.status(404).json({ error: 'User not found' });
       return;
     }
-    res.json({ id, name, password, role, ownerName: ownerName ?? '' });
+    res.json({ id, name, role, ownerName: ownerName ?? '' });
   } catch (err) {
     console.error('PUT /users/:id', err);
     res.status(500).json({ error: 'Failed to update user' });

@@ -27,7 +27,6 @@ router.post('/login', async (req: Request, res: Response) => {
     res.json({
       id:        user.id,
       name:      user.name,
-      password:  user.password,
       role:      user.role,
       ownerName: user.ownerName,
     });

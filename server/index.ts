@@ -11,10 +11,13 @@ import uploadHistoryRoutes from './routes/uploadHistory';
 dotenv.config();
 
 const app  = express();
-const PORT = Number(process.env.SERVER_PORT) || 4000;
+const PORT = Number(process.env.PORT || process.env.SERVER_PORT) || 4000;
 
 // ── Middleware ───────────────────────────────────────────────
-app.use(cors({ origin: process.env.CORS_ORIGIN || 'http://localhost:3000' }));
+const allowedOrigins = process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(',').map(o => o.trim())
+  : ['http://localhost:3000'];
+app.use(cors({ origin: allowedOrigins }));
 app.use(express.json({ limit: '10mb' }));   // tasks with many events can be large
 
 // ── Routes ───────────────────────────────────────────────────
